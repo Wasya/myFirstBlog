@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+{% load humanize %}
+
+{% block article %}
+<h4>{{ article.article_date }}</h4>
+<h2>{{ article.article_title }}</h2>
+<p>{{ article.article_text }}</p>
+<hr>
+<div class="col-md-12">
+        <h3>Комментарии</h3>
+            {% for comment in comments %}
+            <p>{{ comment.comments_text }}</p>
+            <p><b></b>{{ comment.comments_from }}</b> <i> {{ comment.comments_date| naturaltime }} </i></p>
+            <hr>
+            {% endfor %}
+
+    <nav>
+        <ul class="pagination pagination-sm">
+            {% if comments.has_previous %}
+                <li class="active"><a href="/art/{{ article.id }}/com_page/{{ comments.previous_page_number }}/" aria-label="Previous">&laquo;</a> </li>
+            {% else %}
+                <li class="disabled"><a href="">&laquo;</a> </li>
+            {% endif %}
+            {% for com_page in comments.paginator.page_range %}
+                {% if com_page == comments.number %}
+                    <li class= "active"><a href="/art/{{ article.id }}/com_page/{{ com_page }}/">{{ com_page }}</a> </li>
+                {% else %}
+                    <li><a href="/art/{{ article.id }}/com_page/{{ com_page }}/">{{ com_page }}</a> </li>
+                {% endif %}
+            {% endfor %}
+            {% if comments.has_next %}
+                <li class="active"><a href="/art/{{ article.id }}/com_page/{{ comments.next_page_number }}/" aria-label="Next" >&laquo;</a> </li>
+            {% else %}
+                <li class="disabled"><a href="">&laquo;</a> </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% if username %}
+    <div class="input-group">
+        <form action="/articles/addcomment/{{ article.id }}/" method="post">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ form }}
+                    <br/>
+                    <input class="btn btn-default" type="submit" value="добавить коментарий">
+                    <br/>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

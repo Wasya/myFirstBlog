@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% load humanize %}
+{% load staticfiles %}
+{% block article %}
+{% for article in articles %}
+    <h6>Дата публикации: {{ article.article_date|naturalday }}</h6>
+    <h4><a href="/articles/get/{{ article.id }}/">{{ article.article_title }}</a></h4>
+    <p>{{ article.article_text|slice:"200" }}</p>
+    <p><a href="/articles/addlike/{{ article.id }}/"> <img src="{% static "like.jpeg" %}" width="25px" height="25px"></a>{{ article.article_likes }}</p>
+    <hr>
+{% endfor %}
+
+
+    <nav>
+        <ul class="pagination pagination-sm">
+            {% if articles.has_previous %}
+                <li class="active"><a href="/page/{{ articles.previous_page_number }}/" aria-label="Previous">&laquo;</a> </li>
+            {% else %}
+                <li class="disabled"><a href="">&laquo;</a> </li>
+            {% endif %}
+            {% for page in articles.paginator.page_range %}
+                {% if page == articles.number %}
+                    <li class= "active"><a href="/page/{{ page }}/">{{ page }}</a> </li>
+                {% else %}
+                    <li><a href="/page/{{ page }}/">{{ page }}</a> </li>
+                {% endif %}
+            {% endfor %}
+            {% if articles.has_next %}
+                <li class="active"><a href="/page/{{ articles.next_page_number }}/" aria-label="Next" >&laquo;</a> </li>
+            {% else %}
+                <li class="disabled"><a href="">&laquo;</a> </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+{% endblock %}

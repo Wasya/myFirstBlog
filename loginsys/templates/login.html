@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block login %}
+    <div class="col-lg-8">
+        <form action="/auth/login/" method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <span class="input-group-addon" id="username">@</span>
+                <input type="text" class="form-control" name="username" placeholder="имя пользователя" id="username" aria-describedby="basic-addon1">
+            </div>
+
+            <br/>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="password">***</span>
+                <input type="password" class="form-control" name="password" placeholder="Пароль" id="password" aria-describedby="basic-addon1">
+            </div>
+
+
+            {% if login_error %}
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only"> {{ login_error }} </span>
+                </div>
+            {% endif %}
+
+            <br/>
+            <input class="btn btn-default" type="submit" value="Войти">
+            <a href="/auth/register/"> Регистрация</a>
+
+        </form>
+    </div>
+{% endblock %}
