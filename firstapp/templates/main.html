@@ -8,17 +8,26 @@
 </head>
 <body>
 
-    <div>
-
-            <ul>
-                {% if username %}
-                   <li><a href="/auth/logout/">Выйти ({{ username }})</a></li>
-                {% else %}
-                    <li><a href="/auth/login/">Войти</a></li>
-                {% endif %}
-            </ul>
-
-    </div>
+    <header class="top_header">
+        <div class="header_topline">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="row">
+                        <button class="auth_buttons hidden-md hidden-lg"><i class="fa fa-user"> </i> </button>
+                            <div class="top_links">
+                                <ul>
+                                    {% if username %}
+                                        <li><a href="/auth/logout/">Выйти ({{ username }})</a></li>
+                                    {% else %}
+                                        <li><a href="/auth/login/">Войти</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
 <h1><a href="/"> Мой блог </a></h1>
 

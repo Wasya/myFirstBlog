@@ -6559,3 +6559,31 @@ a.list-group-item-danger.active:focus {
 .popover {
   color: #2c3e50;
 }
+
+.header_topline {
+    background-color: #161f29;
+    padding: 15px 0;
+    color: #ffffff;
+}
+
+.header_topline a {
+    color: #ffffff;
+}
+
+.top_links a {
+   float: left;
+}
+
+.top_links a {
+   text-decoration: underline;
+}
+
+.top_links a:hover {
+   text-decoration: none;
+}
+
+.auth_buttons {
+  border: none;
+  background-color: transparent;
+  font-size: 26px
+}
